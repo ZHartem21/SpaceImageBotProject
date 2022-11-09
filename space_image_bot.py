@@ -8,7 +8,8 @@ from dotenv import load_dotenv
 
 
 def post_shuffled_images_in_folder(directory='images', timer='14400'):
-    bot = telegram.Bot(token='5787268580:AAESSaptJN5KJ3KQXQ8r9ziVCeqLvov8X7g')
+    telegram_bot_token = os.environ['TELEGRAM_TOKEN']
+    bot = telegram.Bot(token=telegram_bot_token)
     original_folder, folders, files = list(os.walk(directory))[0]
     print(files)
     while True:
