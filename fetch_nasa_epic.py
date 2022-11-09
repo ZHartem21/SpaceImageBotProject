@@ -1,0 +1,62 @@
+import argparse
+import os
+
+import requests
+from dotenv import load_dotenv
+
+from download_image import download_image
+
+
+def get_epic_links(access_token, number_of_images):
+    response = requests.get(
+        'https://api.nasa.gov/EPIC/api/natural/images',
+        params={'api_key': access_token}
+    )
+    response.raise_for_status()
+    epic_link_template = \
+        'https://api.nasa.gov/EPIC/archive/natural/{0}/{1}/{2}/png/{3}.png'
+    epic_links = []
+    for epic_number, epic in enumerate(response.json()):
+        if epic_number < int(number_of_images):
+            year, month, day = epic['date'][:-9].split('-')
+            link = epic_link_template.format(
+                year,
+                month,
+                day,
+                epic['image']
+            )
+            epic_links.append(link)
+    return epic_links
+
+
+def fetch_nasa_epic(access_token, number_of_images):
+    for image_number, image_link in enumerate(get_epic_links(
+        access_token,
+        number_of_images,
+        )
+    ):
+        download_image(
+            image_link,
+            'images',
+            'epic_{0}.png'.format(image_number),
+            params={'api_key': access_token}
+        )
+
+
+def create_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-number_of_images', default=1, required=False)
+    return parser
+
+
+def main():
+    load_dotenv('bitly_project.env')
+    nasa_access_token = os.environ['BITLY_TOKEN']
+    parser = create_parser()
+    args = parser.parse_args()
+    parsed_number_of_images = args.number_of_images
+    fetch_nasa_epic(nasa_access_token, parsed_number_of_images)
+
+
+if __name__ == '__main__':
+    main()
