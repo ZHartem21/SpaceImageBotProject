@@ -29,11 +29,12 @@ To dowload images you can use one of the three scripts:
 2. `fetch_nasa_epic.py` - downloads pictures from NASA EPIC API. Has an argument `-n` that allows to specify required number of images to download.
 3. `fetch_nasa_apod.py` - downloads astronomy picture of a day from NASA. Also has an argument `-n`.
 
-To start the bot you must launch the *space_image_bot* in terminal. There are two arguments:
+To start the bot you must launch the *space_image_bot* in terminal. There are three arguments:
 `-f` - Image folder, default is 'images'
 `-t` - Posting timer in seconds, default is 4 hours(14400 seconds)
+`-i` - An argument that allows to post a specific image from images folder
 ```
-python space_image_bot.py -f=images -t=14400
+python space_image_bot.py -i='nasa_0"
 ```
 
 ## Project Goals
