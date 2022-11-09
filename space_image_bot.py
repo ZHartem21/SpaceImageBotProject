@@ -4,11 +4,11 @@ import random
 import time
 
 import telegram
-
-bot = telegram.Bot(token='5787268580:AAESSaptJN5KJ3KQXQ8r9ziVCeqLvov8X7g')
+from dotenv import load_dotenv
 
 
 def post_shuffled_images_in_folder(directory='images', timer='14400'):
+    bot = telegram.Bot(token='5787268580:AAESSaptJN5KJ3KQXQ8r9ziVCeqLvov8X7g')
     original_folder, folders, files = list(os.walk(directory))[0]
     print(files)
     while True:
@@ -34,6 +34,7 @@ def main():
     args = parser.parse_args()
     parsed_timer = args.timer
     parsed_folder = args.folder
+    load_dotenv('access_tokens.env')
     post_shuffled_images_in_folder(parsed_folder, parsed_timer)
 
 

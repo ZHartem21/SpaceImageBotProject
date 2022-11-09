@@ -50,7 +50,7 @@ def create_parser():
 
 
 def main():
-    load_dotenv('bitly_project.env')
+    load_dotenv('access_tokens.env')
     nasa_access_token = os.environ['BITLY_TOKEN']
     parser = create_parser()
     args = parser.parse_args()
