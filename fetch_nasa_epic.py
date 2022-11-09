@@ -45,7 +45,7 @@ def fetch_nasa_epic(access_token, number_of_images):
 
 def create_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-n''-number_of_images', default=1, required=False)
+    parser.add_argument('-n', '-number_of_images', default=1, required=False)
     return parser
 
 
@@ -54,7 +54,7 @@ def main():
     nasa_access_token = os.environ['BITLY_TOKEN']
     parser = create_parser()
     args = parser.parse_args()
-    parsed_number_of_images = args.number_of_images
+    parsed_number_of_images = args.n
     fetch_nasa_epic(nasa_access_token, parsed_number_of_images)
 
 

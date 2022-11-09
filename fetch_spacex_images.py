@@ -26,14 +26,14 @@ def fetch_spacex_last_launch(launch_id):
 
 def create_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-lid' '-launch_id', default='latest', required=False)
+    parser.add_argument('-lid', '-launch_id', default='latest', required=False)
     return parser
 
 
 def main():
     parser = create_parser()
     args = parser.parse_args()
-    parsed_launch_id = args.launch_id
+    parsed_launch_id = args.lid
     fetch_spacex_last_launch(parsed_launch_id)
 
 
