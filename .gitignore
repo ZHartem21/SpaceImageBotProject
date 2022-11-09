@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+.vscode/
+__pycache__/
+images/
+
+access_tokens.env
+
 # C extensions
 *.so
 
