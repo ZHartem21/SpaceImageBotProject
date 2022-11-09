@@ -7,11 +7,16 @@ import telegram
 from dotenv import load_dotenv
 
 
-def post_shuffled_images_in_folder(directory='images', timer='14400'):
-    telegram_bot_token = os.environ['TELEGRAM_TOKEN']
-    bot = telegram.Bot(token=telegram_bot_token)
+def post_specified_image(bot, image, directory='images'):
+    print(image)
+    bot.send_photo(
+        chat_id='@SpacePicturesProject',
+        photo=open(os.path.join(directory, image), 'rb')
+    )
+
+
+def post_shuffled_images_in_folder(bot, directory='images', timer='14400'):
     original_folder, folders, files = list(os.walk(directory))[0]
-    print(files)
     while True:
         for file in files:
             bot.send_photo(
@@ -25,18 +30,29 @@ def post_shuffled_images_in_folder(directory='images', timer='14400'):
 
 def create_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-t' '-timer', default='14400', required=False)
-    parser.add_argument('-f' '-folder', default='images', required=False)
+    parser.add_argument('-t', '-timer', default='14400', required=False)
+    parser.add_argument('-f', '-folder', default='images', required=False)
+    parser.add_argument('-i', '-image', required=False)
     return parser
 
 
 def main():
     parser = create_parser()
     args = parser.parse_args()
-    parsed_timer = args.timer
-    parsed_folder = args.folder
+    parsed_timer = args.t
+    parsed_folder = args.f
+    parsed_image = args.i
     load_dotenv('access_tokens.env')
-    post_shuffled_images_in_folder(parsed_folder, parsed_timer)
+    telegram_bot_token = os.environ['TELEGRAM_TOKEN']
+    telegram_bot = telegram.Bot(token=telegram_bot_token)
+    if parsed_image:
+        post_specified_image(telegram_bot, parsed_image)
+    else:
+        post_shuffled_images_in_folder(
+            telegram_bot,
+            parsed_folder,
+            parsed_timer
+        )
 
 
 if __name__ == '__main__':
