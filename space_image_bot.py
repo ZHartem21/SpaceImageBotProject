@@ -7,20 +7,25 @@ import telegram
 from dotenv import load_dotenv
 
 
-def post_specified_image(bot, image, directory='images'):
+def post_specified_image(bot, channel, image, directory='images'):
     print(image)
     bot.send_photo(
-        chat_id='@SpacePicturesProject',
+        chat_id=channel,
         photo=open(os.path.join(directory, image), 'rb')
     )
 
 
-def post_shuffled_images_in_folder(bot, directory='images', timer='14400'):
+def post_shuffled_images_in_folder(
+    bot,
+    channel,
+    directory='images',
+    timer='14400'
+):
     original_folder, folders, files = list(os.walk(directory))[0]
     while True:
         for file in files:
             bot.send_photo(
-                chat_id='@SpacePicturesProject',
+                chat_id=channel,
                 photo=open(os.path.join('images', file), 'rb')
             )
             time.sleep(3)
@@ -61,12 +66,14 @@ def main():
     parsed_image = args.i
     load_dotenv('access_tokens.env')
     telegram_bot_token = os.environ['TELEGRAM_TOKEN']
+    telegram_channel = os.environ['TELEGRAM_CHANNEL']
     telegram_bot = telegram.Bot(token=telegram_bot_token)
     if parsed_image:
-        post_specified_image(telegram_bot, parsed_image)
+        post_specified_image(telegram_bot, telegram_channel, parsed_image)
     else:
         post_shuffled_images_in_folder(
             telegram_bot,
+            telegram_channel,
             parsed_folder,
             parsed_timer
         )

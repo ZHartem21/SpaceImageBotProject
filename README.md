@@ -21,6 +21,8 @@ Two tokens are required for using the tool:
 After gaining access to both of the tokens, you must create a new file called **access_tokens.env** in the project folder, and store two tokens inside of it as:
 1. `NASA_TOKEN`
 2. `TELEGRAM_TOKEN`
+After doing that, you must make the bot an administrator of your desired telegram channel, and also store the channel link in the **access_tokens.env** as `TELEGRAM_CHANNEL`, for example:
+`TELEGRAM_CHANNEL = @SpacePicturesProject`
 
 ## How to use
 
