@@ -17,15 +17,16 @@ def get_epic_links(access_token, number_of_images):
         'https://api.nasa.gov/EPIC/archive/natural/{0}/{1}/{2}/png/{3}.png'
     epic_links = []
     for epic_number, epic in enumerate(response.json()):
-        if epic_number < int(number_of_images):
-            year, month, day = epic['date'][:-9].split('-')
-            link = epic_link_template.format(
-                year,
-                month,
-                day,
-                epic['image']
-            )
-            epic_links.append(link)
+        if not epic_number < int(number_of_images):
+            continue
+        year, month, day = epic['date'][:-9].split('-')
+        link = epic_link_template.format(
+            year,
+            month,
+            day,
+            epic['image']
+        )
+        epic_links.append(link)
     return epic_links
 
 
