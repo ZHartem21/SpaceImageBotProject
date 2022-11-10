@@ -26,9 +26,10 @@ def get_nasa_apod_links(access_token, number_of_images=1):
 
 
 def fetch_nasa_apod(access_token, number_of_images):
-    for image_number, image_link in enumerate(
+    enumarated_links = enumerate(
         get_nasa_apod_links(access_token, number_of_images)
-    ):
+    )
+    for image_number, image_link in enumarated_links:
         download_image(
             image_link,
             'images',

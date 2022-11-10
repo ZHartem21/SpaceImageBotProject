@@ -30,11 +30,10 @@ def get_epic_links(access_token, number_of_images):
 
 
 def fetch_nasa_epic(access_token, number_of_images):
-    for image_number, image_link in enumerate(get_epic_links(
-        access_token,
-        number_of_images,
-        )
-    ):
+    enumerated_links = enumerate(
+        get_epic_links(access_token, number_of_images)
+    )
+    for image_number, image_link in enumerated_links:
         download_image(
             image_link,
             'images',
