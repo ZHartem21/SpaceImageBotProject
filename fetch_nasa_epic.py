@@ -51,7 +51,7 @@ def create_parser():
 
 def main():
     load_dotenv('access_tokens.env')
-    nasa_access_token = os.environ['BITLY_TOKEN']
+    nasa_access_token = os.environ['NASA_TOKEN']
     parser = create_parser()
     args = parser.parse_args()
     parsed_number_of_images = args.n
