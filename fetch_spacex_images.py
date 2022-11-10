@@ -25,8 +25,14 @@ def fetch_spacex_last_launch(launch_id):
 
 
 def create_parser():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-lid', '-launch_id', default='latest', required=False)
+    parser = argparse.ArgumentParser(description='Fetch SpaceX launch images')
+    parser.add_argument(
+        '-lid',
+        '-launch_id',
+        default='latest',
+        required=False,
+        help='Select launch id (default: latest)'
+    )
     return parser
 
 

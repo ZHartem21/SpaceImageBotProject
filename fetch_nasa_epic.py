@@ -44,8 +44,14 @@ def fetch_nasa_epic(access_token, number_of_images):
 
 
 def create_parser():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-n', '-number_of_images', default=1, required=False)
+    parser = argparse.ArgumentParser(description='Fetch NASA EPIC images')
+    parser.add_argument(
+        '-n',
+        '-number_of_images',
+        default=1,
+        required=False,
+        help='Select number of images to download (default: 1)'
+    )
     return parser
 
 

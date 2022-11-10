@@ -29,10 +29,27 @@ def post_shuffled_images_in_folder(bot, directory='images', timer='14400'):
 
 
 def create_parser():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-t', '-timer', default='14400', required=False)
-    parser.add_argument('-f', '-folder', default='images', required=False)
-    parser.add_argument('-i', '-image', required=False)
+    parser = argparse.ArgumentParser(description='Upload images to telegram')
+    parser.add_argument(
+        '-t',
+        '-timer',
+        default='14400',
+        required=False,
+        help='Timer in seconds (Default: 14400'
+    )
+    parser.add_argument(
+        '-f',
+        '-folder',
+        default='images',
+        required=False,
+        help='Image folder (Default: images'
+    )
+    parser.add_argument(
+        '-i',
+        '-image',
+        required=False,
+        help='Specific image to upload'
+    )
     return parser
 
 
