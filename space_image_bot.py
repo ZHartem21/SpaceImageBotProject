@@ -8,11 +8,11 @@ from dotenv import load_dotenv
 
 
 def post_specified_image(bot, channel, image, directory='images'):
-    print(image)
-    bot.send_photo(
-        chat_id=channel,
-        photo=open(os.path.join(directory, image), 'rb')
-    )
+    with open(os.path.join(directory, image), 'rb') as selected_image:
+        bot.send_photo(
+            chat_id=channel,
+            photo=selected_image
+        )
 
 
 def post_shuffled_images_in_folder(
@@ -24,10 +24,11 @@ def post_shuffled_images_in_folder(
     original_folder, folders, files = list(os.walk(directory))[0]
     while True:
         for file in files:
-            bot.send_photo(
-                chat_id=channel,
-                photo=open(os.path.join('images', file), 'rb')
-            )
+            with open(os.path.join(directory, file), 'rb') as current_image:
+                bot.send_photo(
+                    chat_id=channel,
+                    photo=current_image
+                )
             time.sleep(3)
         random.shuffle(files)
         time.sleep(timer)
