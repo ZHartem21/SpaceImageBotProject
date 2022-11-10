@@ -19,9 +19,9 @@ def get_nasa_apod_links(access_token, number_of_images=1):
     )
     response.raise_for_status()
     apod_links = []
-    for apod_data in response.json():
-        if scan_file_extension(apod_data.get('url')):
-            apod_links.append(apod_data.get('url'))
+    for apod in response.json():
+        if scan_file_extension(apod.get('url')):
+            apod_links.append(apod.get('url'))
     return apod_links
 
 
